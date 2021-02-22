@@ -1,7 +1,7 @@
 import React from "react";
-import Books from "./pages/Books";
 import Nav from "./components/Nav";
 import Search from "./pages/Search"
+import Saved from "./pages/Saved"
 import Jumbotron from "./components/Jumbotron"
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 
@@ -11,11 +11,11 @@ function App() {
     <div>
       <Nav />
         <Jumbotron><h1>React Google Books</h1></Jumbotron>
-        <Route exact path={["/", "/books"]}>
-          <Books />
-        </Route>
-        <Route exact path="/search">
+        <Route exact path={["/", "/search"]}>
           <Search />
+        </Route>
+        <Route exact path="/saved">
+          <Saved />
         </Route>
 
     </div>

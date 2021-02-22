@@ -38,36 +38,36 @@ export default function Search() {
 
     return (
         <div>
+            <Container>
+            <h1 style={{textAlign: "center"}}>Search Page</h1>
+                    <div >
+                        <input 
+                        name="search" 
+                        value={bookSearch}
+                        onChange={handleInputChange}
+                        placeholder="search"
+                        />
 
-            <h1>Search Page</h1>
-            <input 
-            name="search" 
-            value={bookSearch}
-            onChange={handleInputChange}
-            placeholder="search"
-            />
-
-            <button
-                onClick={handleFormSubmit}
-                type="success"
-                className="input-lg"
-                >Search
-            </button>
-
-            <List>
-                {books.map(book => {
-                  return (
-                    <ListItem key={book.id}>
-                        <a href={book.volumeInfo.infoLink}>
-                        <strong>
-                          {book.volumeInfo.title} by {book.volumeInfo.authors}
-                        </strong>
-                        </a>
-                      <DeleteBtn onClick={() =>{}} />
-                    </ListItem>
-                  );
-                })}
-              </List>
-
+                        <button
+                            onClick={handleFormSubmit}
+                            type="success"
+                            className="btn btn-success"
+                            >Search
+                        </button>
+                    </div>
+                <List>
+                    {books.map(book => {
+                    return (
+                        <ListItem key={book.id}>
+                            <a href={book.volumeInfo.infoLink}>
+                            <strong>
+                            {book.volumeInfo.title} by {book.volumeInfo.authors}
+                            </strong>
+                            </a>
+                        </ListItem>
+                    );
+                    })}
+                </List>
+            </Container>
         </div>
     )}
