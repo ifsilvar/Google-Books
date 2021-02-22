@@ -55,11 +55,12 @@ export default function Search() {
                             >Search
                         </button>
                     </div>
-                <List>
+                <div>
                     {books.map(book => {
                     return (
                         <ListItem key={book.id}>
-                            <a href={book.volumeInfo.infoLink}>
+                            <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="thumbnail"/>
+                            <a href={book.volumeInfo.infoLink} target="_blank">
                             <strong>
                             {book.volumeInfo.title} by {book.volumeInfo.authors}
                             </strong>
@@ -67,7 +68,7 @@ export default function Search() {
                         </ListItem>
                     );
                     })}
-                </List>
+                </div>
             </Container>
         </div>
     )}
