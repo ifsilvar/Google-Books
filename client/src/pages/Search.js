@@ -9,21 +9,37 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 export default function Search() {
         // Setting our component's initial state
         const [books, setBooks] = useState([])
-        const [formObject, setFormObject] = useState({})
+        const [bookSearch, setBookSearch] = useState("")
       
         // Load all books and store them with setBooks
-        useEffect(() => {
-            loadBooks()
-        }, [])
-
-        function loadBooks() {
+        // useEffect(() => {
+        //     loadBooks()
+        // }, [])
+        
+        // function loadBooks(event) {
             // console.log(events)
-            // const inputValue = events.srcElement
-            API.searchBook().then((data) => {
-                console.log(data.data.items)
-                setBooks(data.data.items)
-            })
-            .catch(err => console.log(err));
+            // const inputValue = event.srcElement
+            // API.searchBook(inputValue).then((data) => {
+            //     console.log(data.data.items)
+            //     setBooks(data.data.items)
+            // })
+            // .catch(err => console.log(err));
+            const handleInputChange = event => {
+                const { value } = event.target;
+                setBookSearch(value);
+              };
+
+            const handleFormSubmit = event => {
+                // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+                event.preventDefault();
+                API.searchBook(bookSearch)
+                    .then((data) => {
+                        console.log(data.data.items)
+                        setBooks(data.data.items)
+                    })
+                //   .then(res => setBooks(data.data.items))
+                  .catch(err => console.log(err));
+              };
 
             // const handleChange = events => {
                 //     const inputValue = events.target.value
@@ -31,18 +47,40 @@ export default function Search() {
                     //         console.log(data)
                     //     })
                     // }
-                }
-        function handleInputChange(event) {
-            const { name, value } = event.target;
-            setFormObject({...formObject, [name]: value})
-            };
+                // }
 
     return (
         <div>
 
-                <h1>Search Page</h1>
-                <input name="title" onChange={handleInputChange}/>
-                {/* <button type="submit" onClick={Search}></button> */}
+            <h1>Search Page</h1>
+            <input 
+            name="search" 
+            value={bookSearch}
+            onChange={handleInputChange}
+            placeholder="search"
+            />
+
+            <button
+                onClick={handleFormSubmit}
+                type="success"
+                className="input-lg"
+                >Search
+            </button>
+
+            <List>
+                {books.map(book => {
+                  return (
+                    <ListItem key={book.id}>
+                        <a href={book.volumeInfo.infoLink}>
+                        <strong>
+                          {book.volumeInfo.title} by {book.volumeInfo.authors}
+                        </strong>
+                        </a>
+                      <DeleteBtn onClick={() =>{}} />
+                    </ListItem>
+                  );
+                })}
+              </List>
 
         </div>
     )}
