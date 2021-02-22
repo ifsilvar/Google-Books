@@ -10,11 +10,6 @@ export default function Search() {
         // Setting our component's initial state
         const [books, setBooks] = useState([])
         const [bookSearch, setBookSearch] = useState("")
-      
-        // Load all books and store them with setBooks
-        // useEffect(() => {
-        //     loadBooks()
-        // }, [])
         
         // function loadBooks(event) {
             // console.log(events)
