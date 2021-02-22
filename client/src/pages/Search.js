@@ -10,31 +10,23 @@ export default function Search() {
         // Setting our component's initial state
         const [books, setBooks] = useState([])
         const [bookSearch, setBookSearch] = useState("")
-        
-        // function loadBooks(event) {
-            // console.log(events)
-            // const inputValue = event.srcElement
-            // API.searchBook(inputValue).then((data) => {
-            //     console.log(data.data.items)
-            //     setBooks(data.data.items)
-            // })
-            // .catch(err => console.log(err));
-            const handleInputChange = event => {
-                const { value } = event.target;
-                setBookSearch(value);
-              };
 
-            const handleFormSubmit = event => {
-                // When the form is submitted, prevent its default behavior, get recipes update the recipes state
-                event.preventDefault();
-                API.searchBook(bookSearch)
-                    .then((data) => {
-                        console.log(data.data.items)
-                        setBooks(data.data.items)
-                    })
-                //   .then(res => setBooks(data.data.items))
-                  .catch(err => console.log(err));
-              };
+        const handleInputChange = event => {
+            const { value } = event.target;
+            setBookSearch(value);
+            };
+
+        const handleFormSubmit = event => {
+            // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+            event.preventDefault();
+            API.searchBook(bookSearch)
+                .then((data) => {
+                    console.log(data.data.items)
+                    setBooks(data.data.items)
+                })
+            //   .then(res => setBooks(data.data.items))
+            .catch(err => console.log(err));
+        };
 
             // const handleChange = events => {
                 //     const inputValue = events.target.value
