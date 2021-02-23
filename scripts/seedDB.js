@@ -24,7 +24,7 @@ const bookSeed = [
     image: "http://books.google.com/books/content?id=hi17DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
   },
   {
-    title: ["Obama: An Intimate Portrait"],
+    title: "Obama: An Intimate Portrait",
     authors: ["Pete Souza"],
     description: "description",
     link: "https://play.google.com/store/books/details?id=eJq7DgAAQBAJ&source=gbs_api",
