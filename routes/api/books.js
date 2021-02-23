@@ -4,8 +4,8 @@ const Axios = require("axios")
 
 // Matches with "/api/books"
 router.route("/")
-  // .get(booksController.findAll)
-  // .post(booksController.create);
+  .get(booksController.findAll)
+  .post(booksController.create);
 
 // Matches with "/api/books/:id"
 router

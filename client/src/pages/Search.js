@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react";
 import API from "../utils/API.js"
-import DeleteBtn from "../components/DeleteBtn";
+import SaveBtn from "../components/SaveBtn";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
@@ -34,24 +34,28 @@ export default function Search() {
             //   .then(res => setBooks(data.data.items))
             .catch(err => console.log(err));
         };
+
+  // Loads all books and sets them to books
+  function loadBooks() {
+    API.getBooks()
+      .then(res => 
+        setBooks(res.data)
+      )
+      .catch(err => console.log(err));
+  };
+
         //function to save book to db
         function saveBook(){
+
             API.saveBook({
-              title: bookObject.title,
-              authors: bookObject.authors,
-              description: bookObject.title,
-              link: bookObject.link,
-              image: bookObject.image
+              title: books.volumeInfo.title,
+              authors: books.volumeInfo.authors,
+              description: books.volumeInfo.title,
+              link: books.volumeInfo.infoLink,
+              image: books.volumeInfo.imageLinks.smallThumbnail
             })
-              .then(() => setBookObject({
-                title: "",
-                authors: "",
-                description: "",
-                link: "",
-                image: ""
-              }))
-            //   .then(() => loadBooks())
-              .catch(err => console.log(err));
+            .then(res => loadBooks())
+            .catch(err => console.log(err));
           }
 
             // const handleChange = events => {
@@ -89,10 +93,11 @@ export default function Search() {
                             <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="thumbnail" value={bookObject.image} />
                             <strong value={bookObject.title} style={{paddingLeft: "5px"}}>{book.volumeInfo.title}</strong> by 
                             <strong value={bookObject.authors} style={{paddingLeft: "5px"}}>{book.volumeInfo.authors}</strong>
+
                             <a href={book.volumeInfo.infoLink} target="_blank" value={bookObject.link} style={{paddingLeft: "5px"}}>More Info
                             </a>
 
-                            <DeleteBtn onClick={() => saveBook(book.id)} />
+                            <SaveBtn onClick={() => saveBook(book.id), console.log(book.volumeInfo.imageLinks.smallThumbnail)} />
                         </ListItem>
                     );
                     })}
